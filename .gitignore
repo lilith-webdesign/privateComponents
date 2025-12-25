@@ -1,0 +1,14 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+cache
+.vitepress/dist
+.vitepress/cache
+.temp
+.vercel
+.netlify
+.shared
+.agent
+brain
+*.log

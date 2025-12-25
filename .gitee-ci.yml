@@ -1,0 +1,20 @@
+# Gitee CI 部署配置
+#
+# 为了实现自动更新 Gitee Pages，建议结合 Gitee Go 运行构建
+# 或者在 GitHub Actions 中使用 hub-mirror-action 将代码同步到 Gitee
+
+version: "2.0"
+
+stages:
+    - build-and-deploy
+
+build-job:
+    stage: build-and-deploy
+    image: node:20
+    when: manual # 也可以设置为 push
+    script:
+        - npm install
+        - npm run docs:build
+        -  # 构建产物位于 docs/.vitepress/dist
+        - echo "构建完成。Gitee Pages 静态托管建议通过 Gitee 管理界面手动点击‘更新’。"
+        - echo "或者使用 Gitee Go 的部署能力将 dist 目录同步到目标分支。"

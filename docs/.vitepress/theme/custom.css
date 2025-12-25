@@ -1,0 +1,22 @@
+/* 自定义 Element Plus 主题变量 */
+:root {
+    /* 假设公司新的主题色是深紫色 */
+    --el-color-primary: #6b46c1;
+    --el-color-primary-light-3: #9f7aea;
+    --el-color-primary-light-5: #b794f4;
+    --el-color-primary-light-7: #d6bcfa;
+    --el-color-primary-light-8: #e9d8fd;
+    --el-color-primary-light-9: #faf5ff;
+    --el-color-primary-dark-2: #553c9a;
+
+    /* 自定义间距 */
+    --el-border-radius-base: 8px;
+    --el-button-padding-horizontal: 24px;
+    --el-button-padding-vertical: 12px;
+}
+
+/* 按钮微调，体现品牌间距感 */
+.el-button--large {
+    --el-button-size: 48px;
+    padding: 12px 32px;
+}
