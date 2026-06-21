@@ -32,7 +32,11 @@ export default defineConfig({
       {
         text: '通用组件',
         items: [
-          { text: 'Button 按钮', link: '/components/button' },
+          { text: '通用类目组件', link: '/components/button' },
+          { text: '导航类目组件', link: '/components/navigation' },
+          { text: '数据录入组件', link: '/components/data-entry' },
+          { text: '数据展示组件', link: '/components/data-display' },
+          { text: '反馈类组件', link: '/components/feedback' },
           { text: '主题定制 (Element UI)', link: '/components/theme-v2' },
         ]
       },
