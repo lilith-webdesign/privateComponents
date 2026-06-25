@@ -1,22 +1,56 @@
-/* 自定义 Element Plus 主题变量 */
-:root {
-    /* 假设公司新的主题色是深紫色 */
-    --el-color-primary: #6b46c1;
-    --el-color-primary-light-3: #9f7aea;
-    --el-color-primary-light-5: #b794f4;
-    --el-color-primary-light-7: #d6bcfa;
-    --el-color-primary-light-8: #e9d8fd;
-    --el-color-primary-light-9: #faf5ff;
-    --el-color-primary-dark-2: #553c9a;
-
-    /* 自定义间距 */
-    --el-border-radius-base: 8px;
-    --el-button-padding-horizontal: 24px;
-    --el-button-padding-vertical: 12px;
+/* 本地引入静态 Noto Sans SC (思源黑体) 中文字体 (400, 500) */
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./fonts/noto-sans-sc-400.woff2') format('woff2');
 }
 
-/* 按钮微调，体现品牌间距感 */
-.el-button--large {
-    --el-button-size: 48px;
-    padding: 12px 32px;
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./fonts/noto-sans-sc-500.woff2') format('woff2');
+}
+
+/* 本地引入静态 Inter 英文字体 (400, 500, 600, 700) */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./fonts/inter-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./fonts/inter-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./fonts/inter-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./fonts/inter-700.woff2') format('woff2');
+}
+
+/* 补全抗锯齿平滑设置，使中英文字体在内网离线时均更加饱满圆润 */
+html, body, button, input, select, textarea {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }

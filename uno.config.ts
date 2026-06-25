@@ -53,6 +53,12 @@ export default defineConfig({
           --el-border-radius-round: 20px;
         }
 
+        /* 统一 Element Plus 组件的字体家族，防止被 VitePress 全局基础字体覆盖 */
+        [class^="el-"],
+        [class*=" el-"] {
+          font-family: Inter, 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif !important;
+        }
+
         /* 针对不同尺寸 Element Plus 原生组件圆角等变量重声明的全局统一覆盖 */
         .el-button {
           --el-button-border-radius: var(--el-border-radius-base);

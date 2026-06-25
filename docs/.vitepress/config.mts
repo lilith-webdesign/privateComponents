@@ -4,10 +4,14 @@ import UnoCSS from 'unocss/vite'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: '/privateComponents/',
+  srcExclude: ['**/public/**/*.md'],
   vite: {
     plugins: [
       UnoCSS()
-    ]
+    ],
+    ssr: {
+      noExternal: ['vue-fullscreen']
+    }
   },
   title: "公司组件库",
   description: "基于 VitePress 的企业级组件文档",
@@ -17,8 +21,9 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '快速开始', link: '/guide/getting-started' },
       { text: '组件展示', link: '/components/button' },
-      { text: '主题定制', link: '/components/theme-v2' },
       { text: '数据图表', link: '/components/charts' },
+      { text: '登录模板', link: '/templates/login' },
+      { text: '主题定制', link: '/components/theme-v2' },
       { text: 'GIS 演示', link: '/components/gis-demo' }
     ],
 

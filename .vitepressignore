@@ -1,0 +1,2 @@
+# 忽略 public 目录下的 markdown 文件，它们是静态资源，不需要编译为 VitePress 页面
+docs/public/**/*.md

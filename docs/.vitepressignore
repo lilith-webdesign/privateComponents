@@ -1,0 +1,3 @@
+# 忽略相对于 docs 目录的静态 markdown 文件
+public/**/*.md
+white-book/**/*.md
