@@ -54,3 +54,108 @@ html, body, button, input, select, textarea {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+
+/* 优化整个 VitePress 的最大布局宽度变量，并在所有媒体查询和断点下将最大宽度限制为 100% */
+:root {
+  --vp-layout-max-width: 100% !important;
+  --vp-sidebar-width: 240px;
+}
+
+/* 强制清除 html、body、#app 和 .Layout 的 max-width 限制，确保页面始终拉伸填满最外层容器 */
+html, body, #app, .Layout {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* 1. 彻底解决 UnoCSS 与 Tailwind .container 限制，避免大屏（如 >=1536px）居中及限宽带来的空白 */
+.container, .VPDoc .container, .VPLocalNav .container, .VPNavBar .container {
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* 2. 重置正文最大宽度限制，使其能够占满剩余视口宽度 */
+.VPDoc {
+  max-width: 100% !important;
+}
+
+/* 3. 全局及响应式下，将侧边栏、正文、导航栏等元素的边距在桌面端（>=960px）全部锁死为 240px，彻底消除基于屏幕宽度（calc）的拉伸 padding-left */
+@media (min-width: 960px) {
+  .VPSidebar {
+    width: 240px !important;
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+  }
+  
+  .VPContent.has-sidebar {
+    padding-left: 240px !important;
+    padding-right: 32px !important;
+  }
+  
+  /* 为正文容器保留固定 48px 的左内边距，使内容与侧边栏保持舒适的呼吸间距，同时不随屏幕拉伸而变宽 */
+  .VPDoc {
+    padding-left: 48px !important;
+  }
+  .VPDoc .content {
+    padding-left: 0px !important;
+  }
+  
+  .VPNavBar.has-sidebar .content {
+    padding-left: 240px !important;
+  }
+  
+  .VPNavBar.has-sidebar .title {
+    padding-left: 32px !important;
+    width: 240px !important;
+  }
+  
+  .VPNavBar.has-sidebar .divider {
+    padding-left: 240px !important;
+  }
+  
+  .VPLocalNav.has-sidebar {
+    padding-left: 240px !important;
+  }
+}
+
+/* 4. 在 1440px 及以上超大屏下，强制覆盖所有可能导致侧边栏、标题栏或局部导航栏无限偏移的 calc 动态计算 */
+@media (min-width: 1440px) {
+  .VPSidebar {
+    width: 240px !important;
+    padding-left: 32px !important;
+    left: 0 !important;
+  }
+  
+  .VPContent.has-sidebar {
+    padding-left: 240px !important;
+    padding-right: 32px !important;
+  }
+  
+  .VPNavBar.has-sidebar .title {
+    padding-left: 32px !important;
+    width: 240px !important;
+  }
+  
+  .VPNavBar.has-sidebar .content {
+    padding-left: 240px !important;
+    padding-right: 32px !important;
+  }
+  
+  .VPNavBar.has-sidebar .divider {
+    padding-left: 240px !important;
+  }
+  
+  .VPLocalNav.has-sidebar {
+    padding-left: 240px !important;
+  }
+  
+  /* 页脚拉满屏幕宽度并向右偏移 240px 避开侧边栏 */
+  .VPFooter.has-sidebar {
+    width: 100% !important;
+  }
+  .VPFooter.has-sidebar .container {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding-left: 240px !important;
+  }
+}

@@ -24,6 +24,7 @@ export default defineConfig({
       { text: '数据图表', link: '/components/charts' },
       { text: '登录模板', link: '/templates/login' },
       { text: '主题定制', link: '/components/theme-v2' },
+      { text: '字体规范', link: '/guide/font-specification' },
       { text: 'GIS 演示', link: '/components/gis-demo' }
     ],
 
@@ -32,6 +33,7 @@ export default defineConfig({
         text: '开发指南',
         items: [
           { text: '快速开始', link: '/guide/getting-started' },
+          { text: '字体规范', link: '/guide/font-specification' },
         ]
       },
       {
