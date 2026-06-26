@@ -152,6 +152,42 @@
       </div>
     </div>
 
+    <!-- 对比行五：工业大屏数字字体对比 -->
+    <div class="contrast-row pb-2">
+      <!-- 居中的对比标题 -->
+      <div class="text-center mb-6">
+        <div class="text-[9px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-1">
+          对比五
+        </div>
+        <h3 class="text-sm font-black text-slate-800 dark:text-white">
+          工业大屏数字字体对比 (左: 液晶体 DS-Digital / 右: 普通数字 Inter)
+        </h3>
+      </div>
+      
+      <!-- 对比内容 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-0 items-center">
+        <!-- 左侧：规范推荐 (液晶体 DS-Digital) -->
+        <div class="flex justify-center md:justify-end md:pr-12 md:border-r border-slate-200 dark:border-slate-800 min-h-[90px] items-center">
+          <div class="text-center md:text-right select-none">
+            <div class="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-1">实时瞬时出库流量</div>
+            <div class="font-spec-digital-ok text-4xl md:text-5xl font-bold text-emerald-500 dark:text-emerald-400">
+              86,492.35
+            </div>
+          </div>
+        </div>
+        
+        <!-- 右侧：不推荐对比 (普通数字 Inter) -->
+        <div class="flex justify-center md:justify-start md:pl-12 min-h-[90px] items-center">
+          <div class="text-center md:text-left select-none">
+            <div class="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-1">实时瞬时出库流量</div>
+            <div class="font-spec-digital-fail text-4xl md:text-5xl font-bold text-emerald-500 dark:text-emerald-400">
+              86,492.35
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -250,5 +286,17 @@ onUnmounted(() => {
   font-family: 'Georgia', 'Times New Roman', serif;
   font-variant-numeric: normal;
   font-feature-settings: normal;
+}
+
+/* 对比五左侧：DS-Digital 液晶数字字体 */
+.font-spec-digital-ok {
+  font-family: 'DS-Digital', 'DS-DIGI', 'Impact', sans-serif;
+  font-weight: normal;
+}
+
+/* 对比五右侧：普通数字 Inter 字体 */
+.font-spec-digital-fail {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 700;
 }
 </style>

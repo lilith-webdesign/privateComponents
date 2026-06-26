@@ -268,12 +268,46 @@ const mixColor = (color1, color2, weight) => {
 };
 
 // 衍生色计算属性
-const primaryLight3 = computed(() => mixColor(primaryColor.value, '#ffffff', 0.3));
-const primaryLight5 = computed(() => mixColor(primaryColor.value, '#ffffff', 0.5));
-const primaryLight7 = computed(() => mixColor(primaryColor.value, '#ffffff', 0.7));
-const primaryLight8 = computed(() => mixColor(primaryColor.value, '#ffffff', 0.8));
-const primaryLight9 = computed(() => mixColor(primaryColor.value, '#ffffff', 0.9));
-const primaryDark2 = computed(() => mixColor(primaryColor.value, '#000000', 0.2));
+// 十六进制颜色转换为 RGB 字符串 (用于表格行 Hover 等动态 rgba 计算)
+const hexToRgb = (hex) => {
+  const clean = hex.replace('#', '');
+  if (clean.length === 3) {
+    const r = parseInt(clean[0] + clean[0], 16);
+    const g = parseInt(clean[1] + clean[1], 16);
+    const b = parseInt(clean[2] + clean[2], 16);
+    return `${r}, ${g}, ${b}`;
+  }
+  const r = parseInt(clean.substring(0, 2), 16);
+  const g = parseInt(clean.substring(2, 4), 16);
+  const b = parseInt(clean.substring(4, 6), 16);
+  return `${r}, ${g}, ${b}`;
+};
+
+// 衍生色计算属性 (主色为默认水利蓝时使用精心调配的精选色，其余情况退回 mix 混色)
+const primaryLight3 = computed(() => {
+  if (primaryColor.value.toUpperCase() === '#002FA7') return '#144BCC';
+  return mixColor(primaryColor.value, '#ffffff', 0.3);
+});
+const primaryLight5 = computed(() => {
+  if (primaryColor.value.toUpperCase() === '#002FA7') return '#3B66DF';
+  return mixColor(primaryColor.value, '#ffffff', 0.5);
+});
+const primaryLight7 = computed(() => {
+  if (primaryColor.value.toUpperCase() === '#002FA7') return '#7FA0FF';
+  return mixColor(primaryColor.value, '#ffffff', 0.7);
+});
+const primaryLight8 = computed(() => {
+  if (primaryColor.value.toUpperCase() === '#002FA7') return '#BFD0FF';
+  return mixColor(primaryColor.value, '#ffffff', 0.8);
+});
+const primaryLight9 = computed(() => {
+  if (primaryColor.value.toUpperCase() === '#002FA7') return '#E6ECFF';
+  return mixColor(primaryColor.value, '#ffffff', 0.9);
+});
+const primaryDark2 = computed(() => {
+  if (primaryColor.value.toUpperCase() === '#002FA7') return '#001E80';
+  return mixColor(primaryColor.value, '#000000', 0.2);
+});
 
 const successLight3 = computed(() => mixColor(successColor.value, '#ffffff', 0.3));
 const successDark2 = computed(() => mixColor(successColor.value, '#000000', 0.2));
@@ -420,7 +454,7 @@ export default defineConfig({
         .el-table {
           --el-table-border-color: #e4e6eb !important;
           --el-table-header-bg-color: #f5f5f5 !important;
-          --el-table-row-hover-bg-color: rgba(0, 47, 167, 0.04) !important;
+          --el-table-row-hover-bg-color: rgba(${hexToRgb(primaryColor.value)}, 0.04) !important;
         }
         .el-table th.el-table__cell {
           background-color: var(--el-table-header-bg-color) !important;
@@ -513,8 +547,8 @@ export default defineConfig({
           color: ${successDark2.value} !important;
         }
         .el-alert--info.is-light {
-          background-color: \${theme.colors.primary}15 !important;
-          border-color: \${theme.colors.primary}80 !important;
+          background-color: ${primaryLight9.value} !important;
+          border-color: ${primaryLight7.value} !important;
           color: \${theme.colors.primary} !important;
         }
         .el-alert--warning.is-light {

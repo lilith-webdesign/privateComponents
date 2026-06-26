@@ -1,3 +1,12 @@
+/* 引入 DS-Digital (DS-DIGI) 液晶数字字体 (CDN + 本地 fallback) */
+@font-face {
+  font-family: 'DS-Digital';
+  font-style: normal;
+  font-weight: 400;
+  src: local('DS-Digital'), local('DS-DIGI'), url('https://fonts.cdnfonts.com/s/15049/DS-DIGI.woff') format('woff');
+  font-display: swap;
+}
+
 /* 本地引入静态 Noto Sans SC (思源黑体) 中文字体 (400, 500) */
 @font-face {
   font-family: 'Noto Sans SC';
