@@ -1,5 +1,9 @@
 # 导航类目组件
 
+::: info 💡 设计稿链接
+本组件库对应的设计稿链接地址为：[即时设计 - 设计稿](https://js.design/f/9NpeUc?p=FFE66DC1&mode=design)
+:::
+
 导航组件用于在不同的页面、功能或章节间进行流程的引导与定位。我们根据设计规范定义了完整的 Pagination 分页、Tabs 标签页、Dropdown 下拉菜单、PageHeader 页头、Steps 步骤条、SideMenu 侧边导航及 Anchor 锚点组件。
 
 ---

@@ -1,5 +1,9 @@
 # 数据图表 (ECharts)
 
+::: info 💡 设计稿链接
+本组件库对应的设计稿链接地址为：[即时设计 - 设计稿](https://js.design/f/9NpeUc?p=FFE66DC1&mode=design)
+:::
+
 本章节展示如何将 **ECharts** 深度集成到水利信息化业务中。我们为常用的流量监测、降雨散点等场景提供了预设的主题配置。
 
 <div class="p-6 bg-gray-50 rounded-xl mb-8">

@@ -1,5 +1,9 @@
 # 反馈类组件
 
+::: info 💡 设计稿链接
+本组件库对应的设计稿链接地址为：[即时设计 - 设计稿](https://js.design/f/9NpeUc?p=FFE66DC1&mode=design)
+:::
+
 反馈类组件用于在水利业务处理、状态提交、阈值告警以及参数调整等典型人机交互场景中，向用户提供动作反馈、预警拦截、全局通知以及加载提醒。我们根据设计规范，对警告提示 (Alert)、对话框 (Dialog)、抽屉 (Drawer)、气泡确认框 (Popconfirm) 以及轻量悬浮提示 (Message / MessageBox / Notification) 进行了视觉样式与圆角一致性重置。
 
 ---

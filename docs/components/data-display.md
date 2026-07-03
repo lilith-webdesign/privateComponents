@@ -1,5 +1,9 @@
 # 数据展示组件
 
+::: info 💡 设计稿链接
+本组件库对应的设计稿链接地址为：[即时设计 - 设计稿](https://js.design/f/9NpeUc?p=FFE66DC1&mode=design)
+:::
+
 数据展示组件用于在水利业务、监控平台、后台报表等场景中，直观、清晰地呈现大量复杂数据或关联信息。我们根据最新的设计规范，对头像 (Avatar)、徽标 (Badge)、标签 (Tag)、文字提示 (Tooltip)、气泡卡片 (Popover)、表格 (Table)、列表 (List)、折叠面板 (Collapse) 和时间轴 (Timeline) 进行了统一的主题重置与视觉规范覆盖。
 
 ---
