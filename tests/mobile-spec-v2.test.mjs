@@ -24,7 +24,7 @@ test('defines two complete principle groups', async () => {
 
   assert.match(data, /id: 'business'/)
   assert.match(data, /id: 'frontend'/)
-  assert.equal((data.match(/sceneId:/g) ?? []).length, 24)
+  assert.equal((data.match(/^    sceneId:/gm) ?? []).length, 24)
 })
 
 test('device package is imported only on the client', async () => {
