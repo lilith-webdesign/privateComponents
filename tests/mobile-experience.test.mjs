@@ -44,6 +44,23 @@ test('engineer role expands multi-line field scenarios', async () => {
   assert.match(scenes, /当前用户（回显卡）/)
 })
 
+test('admin todo is list then detail with fixed approve actions', async () => {
+  const profile = await read('docs/components/mobile-experience/data/role-profiles.ts')
+  const scenes = await read('docs/components/mobile-spec-v2/scenario-content.ts')
+  const scenario = await read('docs/components/mobile-spec-v2/SpecScenario.vue')
+  assert.match(profile, /adm-todo-list/)
+  assert.match(profile, /adm-todo-detail/)
+  assert.match(profile, /adm-todo-flow/)
+  assert.match(profile, /列表页：分类|列表分类/)
+  assert.match(profile, /底部固定审批/)
+  assert.match(scenes, /'adm-todo-list'\s*:/)
+  assert.match(scenes, /'adm-todo-detail'\s*:/)
+  assert.match(scenes, /申请摘要|附件依据|历史意见/)
+  assert.match(scenario, /admin-flow/)
+  assert.match(scenario, /admin-detail/)
+  assert.match(scenario, /adminCategories/)
+})
+
 test('water-keeper expands patrol workorder alarm water-quality offline', async () => {
   const profile = await read('docs/components/mobile-experience/data/role-profiles.ts')
   const scenes = await read('docs/components/mobile-spec-v2/scenario-content.ts')

@@ -20,8 +20,8 @@
         <div class="good-top-island__shell">
           <div class="good-top-island__core">
             <div class="good-appbar-titles">
-              <small>{{ view.context }}</small>
-              <strong>{{ view.title }}</strong>
+              <small>{{ displayContext }}</small>
+              <strong>{{ displayTitle }}</strong>
             </div>
             <VarButton
               text
@@ -54,6 +54,25 @@
               :text-color="roleValue === role ? '#ffffff' : '#3d5651'"
               @click="roleValue = role"
             >{{ role }}</VarChip>
+          </VarSpace>
+        </div>
+
+        <div
+          v-if="showAdminCategoryChips"
+          class="good-reveal good-segment"
+          style="--reveal-i: 0"
+        >
+          <VarSpace :size="[0, 8]" wrap>
+            <VarChip
+              v-for="cat in adminCategories"
+              :key="cat"
+              size="small"
+              :type="adminCategory === cat ? 'primary' : 'default'"
+              :plain="adminCategory !== cat"
+              :color="adminCategory === cat ? '#0f6b5c' : undefined"
+              :text-color="adminCategory === cat ? '#ffffff' : '#3d5651'"
+              @click="adminCategory = cat"
+            >{{ cat }}</VarChip>
           </VarSpace>
         </div>
 
@@ -365,8 +384,8 @@
     <!-- 常见反例：刻意原生/粗糙控件，突出反模式 -->
     <template v-else>
       <div class="spec-phone-appbar">
-        <span class="spec-phone-appbar__context">{{ view.context }}</span>
-        <strong>{{ view.title }}</strong>
+        <span class="spec-phone-appbar__context">{{ displayContext }}</span>
+        <strong>{{ displayTitle }}</strong>
         <span class="spec-phone-appbar__more" aria-hidden="true">•••</span>
       </div>
 
@@ -561,8 +580,17 @@ const feedbackTone = ref<'info' | 'success' | 'danger'>('info')
 const toast = ref('')
 const uiStateIndex = ref(0)
 const navigationDetail = ref(false)
+const adminDetail = ref(false)
+const adminCategory = ref('全部')
+const adminCategories = ['全部', '审批', '督查', '公文']
 const goodMounted = ref(false)
 const denseMode = computed(() => content.pattern === 'density' && roleIndex.value === 1)
+const showAdminCategoryChips = computed(() => (
+  props.side === 'good'
+  && ['admin-flow', 'tasks'].includes(content.pattern)
+  && ['adm-todo-list', 'adm-todo-flow'].includes(props.sceneId)
+  && !(content.pattern === 'admin-flow' && adminDetail.value)
+))
 
 const conflictOptions = [
   { label: '合并两方记录', value: 'merge' },
@@ -664,11 +692,24 @@ const uiStates = [
   { text: '数据已经过期', tone: 'warning' as ScenarioTone, item: { title: '最后更新于 42 分钟前', meta: '请确认后再用于决策', status: '立即刷新' } },
 ]
 
+const adminDetailBlocks: ScenarioItem[] = [
+  { title: '【申请摘要】', meta: '申请人：城东水厂 · 延续 5 年 · 取水量 120 万 m³/年', status: '块', tone: 'info' },
+  { title: '【附件依据】', meta: '申请表.pdf · 上次许可扫描件 · 水质报告（3）', status: '已齐', tone: 'success' },
+  { title: '【历史意见】', meta: '水政初审：同意报批 · 03-16 王科', status: '2 条', tone: 'neutral' },
+  { title: '【风险提示】', meta: '无缺件 · 可直接审批', status: '可批', tone: 'success' },
+]
+
 const displayItems = computed<ScenarioItem[]>(() => {
   if ((content.pattern === 'role' || content.pattern === 'density') && props.side === 'good') return roleItems[roleIndex.value]
   if (content.pattern === 'states' && props.side === 'good') return [uiStates[uiStateIndex.value].item]
   if (content.pattern === 'navigation' && navigationDetail.value) {
     return [{ title: '北河站水位越线', meta: '详情页 · 状态与处置记录', status: '返回列表', tone: 'danger' }]
+  }
+  if (content.pattern === 'admin-flow' && adminDetail.value && props.side === 'good') {
+    return adminDetailBlocks
+  }
+  if (content.pattern === 'admin-flow' && adminDetail.value && props.side === 'bad') {
+    return [{ title: '正文附件意见全平铺…', meta: '通过 驳回 转发 打印', status: '同权' }]
   }
   if (content.pattern === 'hierarchy' && expanded.value && props.side === 'good') {
     return [
@@ -676,7 +717,12 @@ const displayItems = computed<ScenarioItem[]>(() => {
       { title: '设备详情', meta: '编码 G-002 · 责任人王工 · 固件 1.3.2', status: '已展开', tone: 'info' },
     ]
   }
-  return view.value.items ?? []
+  const base = view.value.items ?? []
+  if (showAdminCategoryChips.value && adminCategory.value !== '全部' && props.side === 'good') {
+    const tag = `【${adminCategory.value}】`
+    return base.filter((item) => item.title.includes(tag) || item.title.includes('二级'))
+  }
+  return base
 })
 
 const displayStatus = computed(() => {
@@ -686,6 +732,9 @@ const displayStatus = computed(() => {
   if (content.pattern === 'offline' && stepIndex.value > 0 && props.side === 'good') return stepIndex.value > 1 ? '3 项已得到服务端确认' : '网络已恢复 · 正在同步 3 项'
   if (content.pattern === 'alarm' && stepIndex.value > 0 && props.side === 'good') return stepIndex.value > 1 ? '处置中 · 王工负责' : '已确认 · 准备处置'
   if (content.pattern === 'command' && progress.value >= 100 && props.side === 'good') return '设备遥信已确认目标开度 45%'
+  if (content.pattern === 'admin-flow' && adminDetail.value && props.side === 'good') return '详情 · 分块阅读依据 · 底部固定审批'
+  if (content.pattern === 'admin-detail' && props.side === 'good') return view.value.status
+  if (showAdminCategoryChips.value && props.side === 'good') return `分类：${adminCategory.value} · 列表认单（类型·部门·时限）`
   return view.value.status
 })
 
@@ -720,16 +769,29 @@ const progressLabel = computed(() => {
 
 const actionLabel = computed(() => {
   if (content.pattern === 'navigation' && navigationDetail.value) return props.side === 'good' ? '返回并恢复列表位置' : '返回系统首页'
+  if (content.pattern === 'admin-flow' && adminDetail.value) return props.side === 'good' ? '通过' : '列表上直接通过'
+  if (content.pattern === 'admin-flow' && !adminDetail.value) return props.side === 'good' ? '进入详情阅读依据' : '列表上一键通过'
   if (content.pattern === 'command' && progress.value >= 100) return '查看最终回执'
   if (content.pattern === 'upload' && progress.value >= 100) return '完成并返回任务'
   if (content.pattern === 'offline' && progress.value >= 100) return '查看服务端记录'
   return view.value.primary
 })
 
+const displayTitle = computed(() => {
+  if (content.pattern === 'admin-flow' && adminDetail.value && props.side === 'good') return '取水许可延续'
+  return view.value.title
+})
+
+const displayContext = computed(() => {
+  if (content.pattern === 'admin-flow' && adminDetail.value && props.side === 'good') return '审批详情 · SP-2026-0318'
+  return view.value.context
+})
+
 const expandedTitle = computed(() => {
   if (content.pattern === 'timeline') return '审计详情：设备遥信 T-884'
   if (content.pattern === 'data') return '图表语义已展开'
   if (content.pattern === 'hierarchy') return '完整信息进入详情层'
+  if (content.pattern === 'admin-detail' || (content.pattern === 'admin-flow' && adminDetail.value)) return '审批结果已记录'
   return '操作结果'
 })
 
@@ -737,6 +799,9 @@ const expandedCopy = computed(() => {
   if (content.pattern === 'timeline') return '执行人李工，现场定位 31.23, 121.47；目标开度 45%，设备反馈 45%。'
   if (content.pattern === 'data') return '横轴为今日时间，纵轴单位为 m；橙色虚线表示警戒水位 29.20 m。'
   if (content.pattern === 'hierarchy') return '列表保持可扫描，设备编码、责任人和固件信息只在需要时出现。'
+  if (content.pattern === 'admin-detail' || (content.pattern === 'admin-flow' && adminDetail.value)) {
+    return '已通过：依据分块已阅，附件齐套，意见已写入流程。'
+  }
   return feedbackMessage.value || '当前状态已经更新。'
 })
 
@@ -843,6 +908,27 @@ function handlePrimary() {
       navigationDetail.value = !navigationDetail.value
       if (!navigationDetail.value) showFeedback(props.side === 'good' ? '已恢复：高风险筛选 · 第 3 项' : '已回到首页，筛选和位置丢失', props.side === 'good' ? 'success' : 'danger')
       break
+    case 'admin-flow':
+      if (props.side === 'bad') {
+        showToast('列表上已通过（未读依据）')
+        break
+      }
+      if (!adminDetail.value) {
+        adminDetail.value = true
+        showFeedback('已进入详情：请分块阅读申请摘要与附件依据', 'info')
+      } else {
+        showFeedback('已通过：底部主按钮完成审批', 'success')
+        expanded.value = true
+      }
+      break
+    case 'admin-detail':
+      if (props.side === 'good') {
+        showFeedback('已通过：依据已阅，结果写入流程', 'success')
+        expanded.value = true
+      } else {
+        showToast('点了其中一个同权按钮')
+      }
+      break
     case 'hierarchy':
       expanded.value = !expanded.value
       break
@@ -877,6 +963,19 @@ function handlePrimary() {
 }
 
 function handleSecondary() {
+  if (content.pattern === 'admin-flow' && adminDetail.value && props.side === 'good') {
+    showFeedback('已选择驳回/补件：须填写原因后提交', 'danger')
+    return
+  }
+  if (content.pattern === 'admin-detail' && props.side === 'good') {
+    showFeedback('已选择驳回/补件：须填写原因后提交', 'danger')
+    return
+  }
+  if (content.pattern === 'admin-flow' && !adminDetail.value && props.side === 'good') {
+    adminCategory.value = adminCategory.value === '全部' ? '审批' : '全部'
+    showFeedback(`已切换分类：${adminCategory.value}`, 'info')
+    return
+  }
   showFeedback(props.side === 'good' ? '次级操作已打开，主任务保持不变' : '次级操作与主操作没有层级', props.side === 'good' ? 'info' : 'danger')
 }
 

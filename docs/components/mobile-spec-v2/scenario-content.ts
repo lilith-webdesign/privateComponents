@@ -784,4 +784,74 @@ export const scenarioContent: Record<string, ScenarioContent> = {
       primary: '完成', note: '假成功，档案残缺无法复核。',
     },
   },
+
+  /* —— 行政人员：列表认单 → 详情分块 → 底部固定审批 —— */
+  'adm-todo-list': {
+    pattern: 'tasks',
+    good: {
+      title: '待办中心', context: '分类 + 核心字段',
+      status: '待我处理 4 · 今日到期 1', statusTone: 'warning',
+      items: [
+        { title: '【审批】取水许可延续', meta: '水政科 · 剩 1 天 · 紧急', status: '待审', tone: 'danger' },
+        { title: '【审批】节水改造资金申请', meta: '财务科 · 剩 5 天 · 普通', status: '待审', tone: 'info' },
+        { title: '【督查】城东渗漏整改回访', meta: '督查办 · 剩 3 天', status: '待办', tone: 'warning' },
+        { title: '【公文】防汛值班通知阅办', meta: '办公室 · 今日', status: '待阅', tone: 'neutral' },
+      ],
+      primary: '打开第一条详情', secondary: '切换：全部/审批/督查/公文',
+      note: '列表就能认单：类型·标题·部门·时限·紧急度。',
+    },
+    bad: {
+      title: '待办', context: '无分类',
+      items: [
+        { title: '事项1', meta: '点击处理' },
+        { title: '事项2', meta: '通过 驳回 转发 删除 收藏' },
+        { title: '事项3', meta: '…' },
+      ],
+      primary: '通过 / 驳回 / 转发', note: '看不出是啥单，列表上堆满同权操作。',
+    },
+  },
+  'adm-todo-detail': {
+    pattern: 'admin-detail',
+    good: {
+      title: '取水许可延续', context: '审批详情 · SP-2026-0318',
+      status: '待我审批 · 关键附件已齐', statusTone: 'info',
+      items: [
+        { title: '【申请摘要】', meta: '申请人：城东水厂 · 延续 5 年 · 取水量 120 万 m³/年', status: '块', tone: 'info' },
+        { title: '【附件依据】', meta: '申请表.pdf · 上次许可扫描件 · 水质报告（3）', status: '已齐', tone: 'success' },
+        { title: '【历史意见】', meta: '水政初审：同意报批 · 03-16 王科', status: '2 条', tone: 'neutral' },
+        { title: '【风险提示】', meta: '无缺件 · 可直接审批', status: '可批', tone: 'success' },
+      ],
+      primary: '通过', secondary: '驳回 / 退回补件',
+      note: '同类数据分块；审批按钮固定在底部。',
+    },
+    bad: {
+      title: '审批页', context: '一屏塞满',
+      items: [
+        { title: '正文附件意见流程日志抄送配置…全部平铺', meta: '通过驳回转发打印收藏置顶' },
+      ],
+      primary: '通过 驳回 转发 打印 收藏', note: '无分块，操作同权挤在顶部，需上滑才找得到正文。',
+    },
+  },
+  'adm-todo-flow': {
+    pattern: 'admin-flow',
+    good: {
+      title: '待办中心', context: '列表 → 详情 → 底部审批',
+      status: '分类：审批 · 待处理 3', statusTone: 'warning',
+      items: [
+        { title: '【审批】取水许可延续', meta: '水政科 · 剩 1 天 · 紧急', status: '待审', tone: 'danger' },
+        { title: '【审批】节水改造资金', meta: '财务科 · 剩 5 天', status: '待审', tone: 'info' },
+        { title: '【督查】渗漏整改回访', meta: '督查办 · 剩 3 天', status: '待办', tone: 'warning' },
+      ],
+      primary: '进入详情阅读依据', secondary: '筛选分类',
+      note: '点进详情后：分块展示 + 底部固定通过/驳回。',
+    },
+    bad: {
+      title: '待办', context: '列表直接批',
+      items: [
+        { title: '取水许可', meta: '通过 | 驳回 | 转发' },
+        { title: '资金申请', meta: '通过 | 驳回 | 转发' },
+      ],
+      primary: '列表上一键通过', note: '未读依据即可批，主次混乱。',
+    },
+  },
 }

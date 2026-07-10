@@ -7,7 +7,8 @@ pageClass: mobile-experience-doc
 
 # 行政人员
 
-审批、督查与政策管理。依据先行，动作简单，不做现场闸控主路径。
+**待办路径：** 列表分类 + 核心字段认单 → 点进详情分块看依据 → **底部固定**通过 / 驳回 / 补件。  
+左侧切场景，顶部读规范，中间左右对比。
 
 <div class="mobile-experience-page">
   <ClientOnly>
