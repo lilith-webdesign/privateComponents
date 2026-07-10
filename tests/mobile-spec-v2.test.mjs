@@ -35,6 +35,20 @@ test('device package is imported only on the client', async () => {
   assert.doesNotMatch(frame, /^import .*@sneas\/telephone/m)
 })
 
+test('workbench synchronizes area, principle, device and reset state', async () => {
+  const workbench = await read('docs/components/mobile-spec-v2/MobileSpecV2.vue')
+  const comparison = await read('docs/components/mobile-spec-v2/SpecComparison.vue')
+
+  assert.match(workbench, /activeAreaId/)
+  assert.match(workbench, /activePrincipleId/)
+  assert.match(workbench, /selectArea/)
+  assert.match(workbench, /resetKey/)
+  assert.match(workbench, /<SpecComparison/)
+  assert.match(comparison, /<MobileDeviceFrame/)
+  assert.match(comparison, /side="good"/)
+  assert.match(comparison, /side="bad"/)
+})
+
 test('V2 route mounts the workbench without changing V1', async () => {
   const page = await read('docs/guide/mobile-specification-v2.md')
   const v1 = await read('docs/guide/mobile-specification.md')
