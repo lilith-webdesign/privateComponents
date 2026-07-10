@@ -49,6 +49,21 @@ test('workbench synchronizes area, principle, device and reset state', async () 
   assert.match(comparison, /side="bad"/)
 })
 
+test('all 24 scenes have content and use Varlet on the recommended side', async () => {
+  const data = await read('docs/components/mobile-spec-v2/mobile-spec-v2-data.ts')
+  const sceneContent = await read('docs/components/mobile-spec-v2/scenario-content.ts')
+  const renderer = await read('docs/components/mobile-spec-v2/SpecScenario.vue')
+  const sceneIds = [...data.matchAll(/^    sceneId: '([^']+)'/gm)].map((match) => match[1])
+
+  assert.equal(sceneIds.length, 24)
+  for (const sceneId of sceneIds) {
+    assert.match(sceneContent, new RegExp(`['\"]${sceneId}['\"]\\s*:`))
+  }
+  assert.match(renderer, /from '@varlet\/ui'/)
+  assert.match(renderer, /<VarButton/)
+  assert.match(renderer, /side === 'good'/)
+})
+
 test('V2 route mounts the workbench without changing V1', async () => {
   const page = await read('docs/guide/mobile-specification-v2.md')
   const v1 = await read('docs/guide/mobile-specification.md')
