@@ -7,6 +7,7 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
+    "test:mobile-v2": "node --test tests/mobile-spec-v2.test.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -22,6 +23,8 @@
     "vue": "^3.5.26"
   },
   "dependencies": {
+    "@sneas/telephone": "^1.1.2",
+    "@varlet/ui": "^3.19.3",
     "echarts": "^6.0.0",
     "element-plus": "^2.13.0",
     "three": "^0.184.0",
