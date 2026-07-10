@@ -1,45 +1,20 @@
 ---
-title: 移动端规范 V2
-outline: false
-aside: false
-pageClass: mobile-spec-v2-doc
+title: 移动端规范 V2（已迁移）
 ---
 
-# 移动端规范 V2
+# 移动端规范 V2 已迁移
 
-本规范面向微信小程序优先、混合 App / WebView 增强的水利信息化移动产品。内容分为**产品与业务流程规范**和**前端交互与 UI 体系**两个区域，并通过可操作的正反移动端示例展示每条准则的实际差异。
+原 V2 能力已拆入：
 
-<div class="mobile-spec-v2-page">
-  <ClientOnly>
-    <MobileSpecV2 />
-  </ClientOnly>
-</div>
+- [全局交互规范](./mobile/global)
+- [分角色业务规范总览](./mobile/)
 
 <script setup>
-import MobileSpecV2 from '../components/mobile-spec-v2/MobileSpecV2.vue'
+import { onMounted } from 'vue'
+import { useRouter } from 'vitepress'
+
+const router = useRouter()
+onMounted(() => {
+  router.go('/guide/mobile/')
+})
 </script>
-
-<style>
-.mobile-spec-v2-page {
-  width: 100%;
-  margin-top: 18px;
-}
-
-.mobile-spec-v2-doc .VPDoc .container,
-.mobile-spec-v2-doc .VPDoc .content,
-.mobile-spec-v2-doc .VPDoc .content-container {
-  max-width: none;
-}
-
-.mobile-spec-v2-doc .VPDoc .content {
-  margin: 0;
-  padding-right: 0;
-  padding-left: 0;
-}
-
-.mobile-spec-v2-page button,
-.mobile-spec-v2-page select,
-.mobile-spec-v2-page input {
-  font-family: inherit;
-}
-</style>

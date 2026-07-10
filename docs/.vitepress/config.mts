@@ -25,8 +25,7 @@ export default defineConfig({
       { text: '登录模板', link: '/templates/login' },
       { text: '主题定制', link: '/components/theme-v2' },
       { text: '字体规范', link: '/guide/font-specification' },
-      { text: '移动端规范', link: '/guide/mobile-specification' },
-      { text: '移动端规范 V2', link: '/guide/mobile-specification-v2' },
+      { text: '移动端体验规范', link: '/guide/mobile/' },
       { text: 'GIS 演示', link: '/components/gis-demo' }
     ],
 
@@ -36,8 +35,18 @@ export default defineConfig({
         items: [
           { text: '快速开始', link: '/guide/getting-started' },
           { text: '字体规范', link: '/guide/font-specification' },
-          { text: '移动端规范', link: '/guide/mobile-specification' },
-          { text: '移动端规范 V2', link: '/guide/mobile-specification-v2' },
+        ]
+      },
+      {
+        text: '移动端体验规范',
+        items: [
+          { text: '总览', link: '/guide/mobile/' },
+          { text: '全局交互规范', link: '/guide/mobile/global' },
+          { text: '管水员', link: '/guide/mobile/roles/water-keeper' },
+          { text: '工程人员', link: '/guide/mobile/roles/engineer' },
+          { text: '调度员', link: '/guide/mobile/roles/dispatcher' },
+          { text: '行政人员', link: '/guide/mobile/roles/admin' },
+          { text: '公众用户', link: '/guide/mobile/roles/public' },
         ]
       },
       {

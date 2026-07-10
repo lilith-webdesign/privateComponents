@@ -480,4 +480,308 @@ export const scenarioContent: Record<string, ScenarioContent> = {
       primary: '更多内容', note: '角色需求被迫迁就同一页面。',
     },
   },
+
+  /* —— 管水员：业务范围→数据视野→UI 规范 —— */
+  'wk-workbench': {
+    pattern: 'tasks',
+    good: {
+      title: '片区工作台', context: '事件驱动 · 管水员',
+      status: '消息：北河站水质氨氮超标 · 点此查看', statusTone: 'danger',
+      items: [
+        { title: '【巡检】南门溢洪道今日巡查', meta: '截止 11:00 · 距离 1.2 km', status: '开始', tone: 'info' },
+        { title: '【报警】北河站水位越线', meta: '一级 · 持续 18 分 · 未确认', status: '确认', tone: 'danger' },
+        { title: '【工单】东干渠渗漏跟进', meta: '已派工程 · 待回执', status: '查看', tone: 'warning' },
+        { title: '【水质】城东水源地例行查看', meta: '2 项接近阈值', status: '打开', tone: 'warning' },
+        { title: '二级入口 · 片区台账', meta: '设施台账 / 历史巡检 / 全部业务', status: '进入', tone: 'neutral' },
+      ],
+      primary: '处理最高优先事件', secondary: '消息中心',
+      note: '主区=巡检/告警/工单/水质事件；台账与全业务在二级。',
+    },
+    bad: {
+      title: '管水业务', context: '模块九宫格',
+      items: [
+        { title: '巡检', meta: '模块' }, { title: '工单', meta: '模块' }, { title: '报警', meta: '模块' },
+        { title: '水质', meta: '模块' }, { title: '台账', meta: '模块' }, { title: '报表', meta: '模块' },
+        { title: '养护', meta: '模块' }, { title: '设置', meta: '模块' }, { title: '更多', meta: '模块' },
+      ],
+      primary: '进入模块', note: '报警与巡检被模块墙淹没。',
+    },
+  },
+  'wk-patrol': {
+    pattern: 'field',
+    good: {
+      title: '现场巡检', context: '南门溢洪道 · 任务 T-092',
+      status: '下半屏主操作 · 定位已带入', statusTone: 'info',
+      items: [
+        { title: '巡检对象', meta: '南门溢洪道 · 片区已核验', status: '地图', tone: 'info' },
+        { title: '检查要点', meta: '3/5 已勾选 · 异常项可拍照', status: '继续', tone: 'warning' },
+      ],
+      primary: '拍照/扫码并暂存', secondary: '打开地图任务点',
+      note: '主按钮在拇指区；地图是任务上下文不是展览。',
+    },
+    bad: {
+      title: '巡检表单', context: '桌面移植',
+      fields: [
+        { label: '设施编码', value: '' }, { label: '设施名称', value: '' },
+        { label: '经度', value: '' }, { label: '纬度', value: '' },
+        { label: '检查说明', value: '', placeholder: '长文本' },
+      ],
+      primary: '右上角 ✓', note: '主操作在顶部小图标，全手填无地图。',
+    },
+  },
+  'wk-workorder': {
+    pattern: 'capture',
+    good: {
+      title: '发起工单', context: '从异常现场带入',
+      status: '对象与证据已带入 · 请确认后发送', statusTone: 'success',
+      items: [
+        { title: '工单对象（回显）', meta: '东干渠桩号 K3+200 · 渗漏异常', status: '已带入', tone: 'success' },
+        { title: '现场证据', meta: '照片 2 · 定位 09:41 · 来源本机', status: '已附', tone: 'info' },
+      ],
+      fields: [
+        { label: '紧急度', value: '高 · 影响行人安全' },
+        { label: '补充说明', value: '', placeholder: '仅补充判断（可选）' },
+      ],
+      primary: '发送工单并跟踪', secondary: '改派接收班组',
+      note: '短路径发送；禁止离开上下文从零建单。',
+    },
+    bad: {
+      title: '新建工单', context: '空白',
+      fields: [
+        { label: '设施编码', value: '' }, { label: '类型', value: '' },
+        { label: '地址', value: '' }, { label: '描述', value: '' },
+        { label: '附件', value: '' },
+      ],
+      primary: '提交', note: '现场证据与对象未带入，易填错对象。',
+    },
+  },
+  'wk-alarm': {
+    pattern: 'incident',
+    good: {
+      title: '报警预警', context: '北河站 · 水位越线',
+      status: '一级告警 · 未确认 · 持续 18 分钟', statusTone: 'danger',
+      metrics: [
+        { label: '当前水位', value: '32.18', unit: 'm', meta: '阈值 31.50 m', tone: 'danger' },
+        { label: '更新', value: '1', unit: '分钟前', meta: '遥测 · 质量正常' },
+      ],
+      items: [
+        { title: '影响范围', meta: '下游堤段需关注 · 已通知值班' },
+        { title: '建议动作', meta: '确认后现场巡查或转工单' },
+      ],
+      steps: [
+        { label: '已送达', meta: '09:18 推送', state: 'done' },
+        { label: '待确认', meta: '确认≠关闭', state: 'active' },
+        { label: '处置/转工单', meta: '确认后解锁', state: 'waiting' },
+      ],
+      primary: '确认并去巡查', secondary: '转工单给工程',
+      note: '生命周期可见；主操作进入处置而非「知道了」。',
+    },
+    bad: {
+      title: '系统通知', context: 'Toast',
+      status: '告警已弹出', statusTone: 'warning',
+      items: [{ title: '水位异常', meta: '点击关闭' }],
+      primary: '知道了', note: '无对象详情、无确认态、无下一步。',
+    },
+  },
+  'wk-water-quality': {
+    pattern: 'metric',
+    good: {
+      title: '水源水质', context: '城东水源地 · 片区权限内',
+      status: '氨氮超标 · 采样 08:40 · 实验室回传', statusTone: 'danger',
+      metrics: [
+        { label: '氨氮', value: '1.42', unit: 'mg/L', meta: '阈值 1.0 · 超标', tone: 'danger' },
+        { label: '浑浊度', value: '0.8', unit: 'NTU', meta: '正常', tone: 'success' },
+        { label: 'pH', value: '7.2', unit: '', meta: '正常 · 2 小时前' },
+        { label: '水源状态', value: '供水中', unit: '', meta: '可上报异常' },
+      ],
+      primary: '上报水质异常 / 转工单', secondary: '查看近 7 日趋势',
+      note: '对象·指标·单位·时间·质量齐全；超标有动作。',
+    },
+    bad: {
+      title: '水质', context: '总览',
+      metrics: [{ label: '水质', value: '优', tone: 'success' }],
+      primary: '刷新', note: '无水源、无指标、无单位时间，无法决策。',
+    },
+  },
+  'wk-offline': {
+    pattern: 'offline',
+    good: {
+      title: '离线暂存', context: '当前弱网 · 片区巡检',
+      status: '已存本机 3 项 · 等待同步', statusTone: 'warning',
+      items: [
+        { title: '溢洪道巡检记录', meta: '仅本地 · 09:12 · 照片 2', status: '待同步', tone: 'warning' },
+        { title: '渗漏异常草稿', meta: '仅本地 · 含定位', status: '待同步', tone: 'warning' },
+        { title: '昨日已确认项', meta: '服务端已确认', status: '已确认', tone: 'success' },
+      ],
+      primary: '网络恢复后同步', secondary: '继续离线巡检',
+      note: '仅本地 ≠ 已确认；队列可点开。',
+    },
+    bad: {
+      title: '提交结果', context: '无网络',
+      status: '提交成功', statusTone: 'success',
+      items: [{ title: '所有操作', meta: '已成功' }],
+      primary: '返回', note: '假成功：实际未到达服务端。',
+    },
+  },
+
+  /* —— 工程人员：业务范围→数据视野→UI 规范，对比必须可区分 —— */
+  'eng-workbench': {
+    pattern: 'tasks',
+    good: {
+      title: '工程工作台', context: '事件驱动 · 非模块墙',
+      status: '消息：东干渠抢修超时风险 · 点此处理', statusTone: 'danger',
+      items: [
+        { title: '【抢修事件】东干渠 2# 闸门', meta: '来源：告警转工单 · 截止 16:00 · 影响下游', status: '处置', tone: 'danger' },
+        { title: '【调试预约】南门泵站变频器', meta: '消息提醒 14:30 · 需联调遥测', status: '出发', tone: 'warning' },
+        { title: '【催缴任务】城东片区 12 户', meta: '离线清单已就绪 · 今日已收 18', status: '继续', tone: 'info' },
+        { title: '二级入口 · 全部业务', meta: '安装台账 / 物资 / 历史档案', status: '进入', tone: 'neutral' },
+      ],
+      primary: '处理最高优先事件', secondary: '打开消息中心',
+      note: '主区=事件与消息；全业务收纳在二级，而不是九宫格首页。',
+    },
+    bad: {
+      title: '工程业务中心', context: '模块九宫格',
+      items: [
+        { title: '施工', meta: '模块' }, { title: '安装', meta: '模块' }, { title: '调试', meta: '模块' },
+        { title: '收费', meta: '模块' }, { title: '用户', meta: '模块' }, { title: '物资', meta: '模块' },
+        { title: '报表', meta: '模块' }, { title: '配置', meta: '模块' }, { title: '更多', meta: '模块' },
+      ],
+      primary: '点进某个模块', note: '事件被模块墙淹没，没有消息驱动入口。',
+    },
+  },
+  'eng-construction': {
+    pattern: 'timeline',
+    good: {
+      title: '施工节点', context: '工单 G-8841 · 东干渠 2#',
+      status: '当前节点可拍照存档 · 备件已自动关联', statusTone: 'info',
+      steps: [
+        { label: '安全交底与围挡', meta: '08:20 · 张工 · 系统带入班组 · 照片 3 张', state: 'done' },
+        { label: '拆检与备件更换', meta: '进行中 · 扫码出库 B-209 已回填', state: 'active' },
+        { label: '通水试运行', meta: '待完成 · 许可号自动带入后可点', state: 'waiting' },
+        { label: '完工验收材料', meta: '待齐套 · 缺件会阻断提交', state: 'waiting' },
+      ],
+      primary: '拍照存档并完成本节点', secondary: '查看自动带入字段',
+      note: '路径短：一键拍照完成节点；档案全：人/时/证/备件都在。',
+    },
+    bad: {
+      title: '施工记录', context: '自由填写',
+      fields: [
+        { label: '施工内容', value: '', placeholder: '请输入长描述' },
+        { label: '完成情况', value: '', placeholder: '请输入' },
+        { label: '备注', value: '', placeholder: '请输入' },
+      ],
+      primary: '提交', note: '全手填、无节点、无照片、无自动带入，短路径也无档案。',
+    },
+  },
+  'eng-install': {
+    pattern: 'capture',
+    good: {
+      title: '安装登记', context: '扫码核验通过',
+      status: '请确认下方为当前安装用户后再继续', statusTone: 'success',
+      items: [
+        { title: '当前用户（回显卡）', meta: '户主 王某 · 户号 370201-08821 · 城东三村 12 号', status: '已核验', tone: 'success' },
+        { title: '关联表计', meta: '表号 M-55219 · 由扫码带入 · 可重扫', status: '已绑定', tone: 'info' },
+      ],
+      fields: [
+        { label: '安装定位', value: 'GPS 已回填 · 可微调图钉' },
+        { label: '铅封号', value: '', placeholder: '扫码铅封（必填）' },
+        { label: '现场说明', value: '', placeholder: '仅异常时填写' },
+      ],
+      primary: '确认用户无误，拍照提交', secondary: '不是此户，重新扫码',
+      note: '先信赖回显卡，再最少字段；禁止从空白大表开始。',
+    },
+    bad: {
+      title: '安装登记', context: '空白表单',
+      fields: [
+        { label: '县', value: '' }, { label: '镇', value: '' }, { label: '村', value: '' },
+        { label: '户主', value: '' }, { label: '身份证', value: '' }, { label: '电话', value: '' },
+        { label: '表号', value: '' }, { label: '经度', value: '' }, { label: '纬度', value: '' },
+      ],
+      primary: '提交', note: '无「当前用户」确认卡，装错户也不自知。',
+    },
+  },
+  'eng-debug': {
+    pattern: 'metric',
+    good: {
+      title: '调试联调', context: '南门泵站 · 变频器 #2',
+      status: '联调中 · 李工 · 09:42 起 · 遥测 1 分钟前', statusTone: 'info',
+      metrics: [
+        { label: '设定频率', value: '42.0', unit: 'Hz', meta: '本次目标', tone: 'info' },
+        { label: '反馈频率', value: '41.8', unit: 'Hz', meta: '偏差 -0.2', tone: 'success' },
+        { label: '出口压力', value: '0.28', unit: 'MPa', meta: '阈值 0.35' },
+        { label: '数据质量', value: '正常', unit: '', meta: '来源：遥测' },
+      ],
+      primary: '记录本步（含设定/反馈）', secondary: '结束联调',
+      note: '可信对照：设定与反馈同屏，不是填一个数。',
+    },
+    bad: {
+      title: '设备调试', context: '参数',
+      metrics: [{ label: '频率', value: '42', tone: 'success' }],
+      primary: '保存成功', note: '裸数字 + 假成功，无法复核谁调了什么。',
+    },
+  },
+  'eng-billing': {
+    pattern: 'tasks',
+    good: {
+      title: '水费收缴', context: '欠费事件列表 · 城东片区',
+      status: '今日消息：3 户可上门 · 离线清单已下载', statusTone: 'info',
+      items: [
+        { title: '王某 · …8821', meta: '欠费 126.40 元 · 2 期 · 上次 03-12', status: '收款', tone: 'warning' },
+        { title: '李某 · …7710', meta: '欠费 48.00 元 · 1 期 · 已提醒', status: '收款', tone: 'info' },
+        { title: '赵企 · …6602', meta: '欠费 2,860.00 元 · 需开票', status: '登记', tone: 'danger' },
+      ],
+      primary: '扫码/搜户收款', secondary: '同步账单',
+      note: '事件=欠费户；主操作=收款，不是进报表。',
+    },
+    bad: {
+      title: '收费系统', context: '后台菜单',
+      items: [
+        { title: '综合查询', meta: '12 个筛选' },
+        { title: '报表中心', meta: '月季年报' },
+        { title: '费率配置', meta: '系统管理' },
+      ],
+      primary: '进入查询', note: '现场收缴被管理功能主导。',
+    },
+  },
+  'eng-user-mgmt': {
+    pattern: 'hierarchy',
+    good: {
+      title: '用户档案', context: '服务续办上下文',
+      status: '摘要卡：王某 · …8821 · 欠费 126.40 元', statusTone: 'warning',
+      items: [
+        { title: '基础信息', meta: '地址已展示 · 证件默认脱敏', status: '展开', tone: 'neutral' },
+        { title: '用表安装', meta: 'M-55219 · 2024-11 · 铅封完整' },
+        { title: '服务记录', meta: '报修 1 · 最近 2025-12-03', status: '展开', tone: 'info' },
+      ],
+      primary: '催缴 / 报修续办', secondary: '返回',
+      note: '先摘要与续办，再分层展开；非编辑全部。',
+    },
+    bad: {
+      title: '用户管理', context: '全量字段',
+      items: [
+        { title: '身份证 银行 内部备注 合同 全量抄表…', meta: '默认全部展开可编辑' },
+      ],
+      primary: '保存全部', note: '无业务续办主路径，且易越权展示。',
+    },
+  },
+  'eng-acceptance': {
+    pattern: 'timeline',
+    good: {
+      title: '验收闭环', context: '批次 YA-0318 · 材料驱动',
+      status: '材料 5/6 · 缺「用户确认」不可提交', statusTone: 'warning',
+      steps: [
+        { label: '安装记录', meta: '表号/铅封/定位 · 自动校验通过', state: 'done' },
+        { label: '现场照片', meta: '每户 ≥2 张 · 已齐', state: 'done' },
+        { label: '用户确认', meta: '缺 1 户签字 · 点此补传', state: 'active' },
+        { label: '提交验收', meta: '齐套后解锁', state: 'waiting' },
+      ],
+      primary: '补传缺件', secondary: '保存草稿',
+      note: '清单不齐=不能成功；缺件可定位。',
+    },
+    bad: {
+      title: '验收', context: '一键',
+      steps: [{ label: '提交成功', meta: '未校验材料', state: 'done' }],
+      primary: '完成', note: '假成功，档案残缺无法复核。',
+    },
+  },
 }

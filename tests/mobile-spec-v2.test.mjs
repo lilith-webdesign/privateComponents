@@ -12,12 +12,13 @@ test('declares V2 dependencies and test script', async () => {
   assert.equal(pkg.scripts['test:mobile-v2'], 'node --test tests/mobile-spec-v2.test.mjs')
 })
 
-test('keeps V1 and adds V2 navigation', async () => {
+test('unified mobile experience replaces dual V1/V2 nav entries', async () => {
   const config = await read('docs/.vitepress/config.mts')
 
-  assert.match(config, /移动端规范', link: '\/guide\/mobile-specification'/)
-  assert.match(config, /移动端规范 V2', link: '\/guide\/mobile-specification-v2'/)
+  assert.match(config, /移动端体验规范/)
+  assert.match(config, /\/guide\/mobile\//)
   assert.match(config, /noExternal: \['vue-fullscreen', '@varlet\/ui'\]/)
+  assert.doesNotMatch(config, /mobile-specification-v2/)
 })
 
 test('defines two complete principle groups', async () => {
@@ -61,17 +62,16 @@ test('all 24 scenes have content and use Varlet on the recommended side', async 
     assert.match(sceneContent, new RegExp(`['\"]${sceneId}['\"]\\s*:`))
   }
   assert.match(renderer, /from '@varlet\/ui\/es\/button\/index\.mjs'/)
-  assert.match(renderer, /<VarButton/)
+  assert.match(renderer, /good-cta|good-top-island|<VarButton/)
   assert.match(renderer, /side === 'good'/)
 })
 
-test('V2 route mounts the workbench without changing V1', async () => {
+test('legacy V2 page redirects into mobile experience tree', async () => {
   const page = await read('docs/guide/mobile-specification-v2.md')
   const v1 = await read('docs/guide/mobile-specification.md')
 
-  assert.match(page, /aside: false/)
-  assert.match(page, /pageClass: mobile-spec-v2-doc/)
-  assert.match(page, /\.mobile-spec-v2-doc \.VPDoc \.content-container/)
-  assert.match(page, /<MobileSpecV2 \/>/)
-  assert.match(v1, /<MobileSpecDemo \/>/)
+  assert.match(page, /已迁移/)
+  assert.match(page, /\/guide\/mobile\//)
+  assert.match(v1, /已迁移/)
+  assert.match(v1, /\/guide\/mobile\/global/)
 })

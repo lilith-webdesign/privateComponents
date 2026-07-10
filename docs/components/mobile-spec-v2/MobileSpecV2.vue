@@ -2,7 +2,7 @@
   <section class="mobile-spec-v2" aria-labelledby="mobile-spec-v2-title">
     <header class="msv2-intro">
       <div>
-        <span class="msv2-kicker">MOBILE EXPERIENCE SYSTEM · V2</span>
+        <span class="msv2-kicker">水利移动体验体系</span>
         <h2 id="mobile-spec-v2-title">从业务判断到前端落地</h2>
         <p>围绕水利移动作业，把产品流程约束与高频 UI 模式放进同一套可操作、可比较、可验收的工作台。</p>
       </div>

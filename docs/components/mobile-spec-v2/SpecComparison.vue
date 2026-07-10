@@ -5,16 +5,18 @@
         <span class="spec-comparison__signal" aria-hidden="true" />
         <div>
           <strong>规范推荐</strong>
-          <span>GOOD PRACTICE</span>
+          <span>Material 3 · Varlet</span>
         </div>
       </header>
-      <MobileDeviceFrame :device="device" :label="`${principle.title}规范推荐示例`">
-        <SpecScenario
-          :key="`${principle.sceneId}-good-${resetKey}`"
-          :scene-id="principle.sceneId"
-          side="good"
-        />
-      </MobileDeviceFrame>
+      <div class="spec-comparison__stage">
+        <MobileDeviceFrame :device="device" :label="`${principle.title}规范推荐示例`">
+          <SpecScenario
+            :key="`${principle.sceneId}-good-${resetKey}`"
+            :scene-id="principle.sceneId"
+            side="good"
+          />
+        </MobileDeviceFrame>
+      </div>
     </section>
 
     <section class="spec-comparison__item spec-comparison__item--bad">
@@ -22,16 +24,18 @@
         <span class="spec-comparison__signal" aria-hidden="true" />
         <div>
           <strong>常见反例</strong>
-          <span>ANTI-PATTERN</span>
+          <span>原生反模式</span>
         </div>
       </header>
-      <MobileDeviceFrame :device="device" :label="`${principle.title}常见反例`">
-        <SpecScenario
-          :key="`${principle.sceneId}-bad-${resetKey}`"
-          :scene-id="principle.sceneId"
-          side="bad"
-        />
-      </MobileDeviceFrame>
+      <div class="spec-comparison__stage">
+        <MobileDeviceFrame :device="device" :label="`${principle.title}常见反例`">
+          <SpecScenario
+            :key="`${principle.sceneId}-bad-${resetKey}`"
+            :scene-id="principle.sceneId"
+            side="bad"
+          />
+        </MobileDeviceFrame>
+      </div>
     </section>
   </div>
 </template>
