@@ -1,0 +1,114 @@
+.mobile-spec-v2 {
+  --msv2-ink: #15202b;
+  --msv2-muted: #637083;
+  --msv2-line: #dbe1e8;
+  --msv2-surface: #ffffff;
+  --msv2-canvas: #f3f6f9;
+  --msv2-primary: #006b5f;
+  --msv2-primary-soft: #d7f2ec;
+  --msv2-good: #087f5b;
+  --msv2-bad: #c13d45;
+  color: var(--msv2-ink);
+}
+
+.mobile-device-stage {
+  position: relative;
+  width: min(100%, 322px);
+  margin-inline: auto;
+  line-height: 1.5;
+  color: #17212b;
+}
+
+.mobile-device-stage--pixel,
+.mobile-device-placeholder,
+.mobile-device-fallback {
+  aspect-ratio: 350 / 746;
+}
+
+.mobile-device-stage--iphone,
+.mobile-device-stage--iphone .mobile-device-placeholder,
+.mobile-device-stage--iphone .mobile-device-fallback {
+  aspect-ratio: 415 / 843;
+}
+
+.mobile-device-component {
+  display: block;
+  width: 100%;
+}
+
+.mobile-device-screen {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #f5f7fa;
+  color: #17212b;
+  scrollbar-width: thin;
+}
+
+.mobile-device-placeholder,
+.mobile-device-fallback {
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 10px solid #16191d;
+  border-radius: 46px;
+  background: #f5f7fa;
+  box-shadow: 0 22px 46px rgb(22 29 37 / 18%);
+}
+
+.mobile-device-placeholder {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 16px;
+}
+
+.mobile-device-placeholder__speaker {
+  position: absolute;
+  top: 13px;
+  left: 50%;
+  width: 78px;
+  height: 22px;
+  border-radius: 999px;
+  background: #16191d;
+  transform: translateX(-50%);
+}
+
+.mobile-device-placeholder__text {
+  color: #6c7785;
+  font-size: 13px;
+}
+
+.mobile-device-fallback {
+  display: flex;
+  flex-direction: column;
+  padding-top: 26px;
+}
+
+.mobile-device-fallback__status {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 2;
+  display: flex;
+  height: 36px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: #f5f7fa;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.mobile-device-screen--fallback {
+  flex: 1;
+}
+
+@media (max-width: 420px) {
+  .mobile-device-stage {
+    width: min(100%, 306px);
+  }
+}
