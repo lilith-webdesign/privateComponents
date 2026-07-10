@@ -12,6 +12,30 @@
   letter-spacing: 0;
 }
 
+html.dark .mobile-spec-v2 {
+  --msv2-ink: #e8edf2;
+  --msv2-muted: #a8b3bf;
+  --msv2-line: #3a444f;
+  --msv2-surface: #20262e;
+  --msv2-canvas: #171c22;
+  --msv2-primary: #55d2c0;
+  --msv2-primary-soft: #173c37;
+  --msv2-good: #50c99e;
+  --msv2-bad: #ff7d86;
+}
+
+html.dark .msv2-area-switch button.is-active,
+html.dark .msv2-principle-rail button:hover,
+html.dark .msv2-principle-rail button.is-active {
+  background: #173c37;
+  color: #7be1d2;
+}
+
+html.dark .msv2-device-switch button.is-active {
+  background: #087f70;
+  color: #fff;
+}
+
 .msv2-intro {
   display: flex;
   align-items: flex-end;

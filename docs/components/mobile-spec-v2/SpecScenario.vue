@@ -223,8 +223,16 @@
 
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
-import { Button as VarButton, Chip as VarChip, Input as VarInput, Progress as VarProgress, Switch as VarSwitch } from '@varlet/ui'
-import '@varlet/ui/es/style.mjs'
+import VarButton from '@varlet/ui/es/button/index.mjs'
+import VarChip from '@varlet/ui/es/chip/index.mjs'
+import VarInput from '@varlet/ui/es/input/index.mjs'
+import VarProgress from '@varlet/ui/es/progress/index.mjs'
+import VarSwitch from '@varlet/ui/es/switch/index.mjs'
+import '@varlet/ui/es/button/style/index.mjs'
+import '@varlet/ui/es/chip/style/index.mjs'
+import '@varlet/ui/es/input/style/index.mjs'
+import '@varlet/ui/es/progress/style/index.mjs'
+import '@varlet/ui/es/switch/style/index.mjs'
 import { scenarioContent } from './scenario-content'
 import type { ScenarioItem, ScenarioStep, ScenarioTone } from './scenario-content'
 

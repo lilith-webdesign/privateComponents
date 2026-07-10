@@ -10,7 +10,7 @@ export default defineConfig({
       UnoCSS()
     ],
     ssr: {
-      noExternal: ['vue-fullscreen']
+      noExternal: ['vue-fullscreen', '@varlet/ui']
     }
   },
   title: "公司组件库",
@@ -26,6 +26,7 @@ export default defineConfig({
       { text: '主题定制', link: '/components/theme-v2' },
       { text: '字体规范', link: '/guide/font-specification' },
       { text: '移动端规范', link: '/guide/mobile-specification' },
+      { text: '移动端规范 V2', link: '/guide/mobile-specification-v2' },
       { text: 'GIS 演示', link: '/components/gis-demo' }
     ],
 
@@ -36,6 +37,7 @@ export default defineConfig({
           { text: '快速开始', link: '/guide/getting-started' },
           { text: '字体规范', link: '/guide/font-specification' },
           { text: '移动端规范', link: '/guide/mobile-specification' },
+          { text: '移动端规范 V2', link: '/guide/mobile-specification-v2' },
         ]
       },
       {

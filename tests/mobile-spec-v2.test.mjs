@@ -17,6 +17,7 @@ test('keeps V1 and adds V2 navigation', async () => {
 
   assert.match(config, /移动端规范', link: '\/guide\/mobile-specification'/)
   assert.match(config, /移动端规范 V2', link: '\/guide\/mobile-specification-v2'/)
+  assert.match(config, /noExternal: \['vue-fullscreen', '@varlet\/ui'\]/)
 })
 
 test('defines two complete principle groups', async () => {
@@ -59,7 +60,7 @@ test('all 24 scenes have content and use Varlet on the recommended side', async 
   for (const sceneId of sceneIds) {
     assert.match(sceneContent, new RegExp(`['\"]${sceneId}['\"]\\s*:`))
   }
-  assert.match(renderer, /from '@varlet\/ui'/)
+  assert.match(renderer, /from '@varlet\/ui\/es\/button\/index\.mjs'/)
   assert.match(renderer, /<VarButton/)
   assert.match(renderer, /side === 'good'/)
 })
@@ -68,6 +69,9 @@ test('V2 route mounts the workbench without changing V1', async () => {
   const page = await read('docs/guide/mobile-specification-v2.md')
   const v1 = await read('docs/guide/mobile-specification.md')
 
+  assert.match(page, /aside: false/)
+  assert.match(page, /pageClass: mobile-spec-v2-doc/)
+  assert.match(page, /\.mobile-spec-v2-doc \.VPDoc \.content-container/)
   assert.match(page, /<MobileSpecV2 \/>/)
   assert.match(v1, /<MobileSpecDemo \/>/)
 })
